@@ -1,0 +1,105 @@
+CREATE TABLE Reviews(
+    Employee_ID int primary key NOT NULL,
+    Personal_Rating Varchar(30) NOT NULL,
+    Technical_Ratin Varchar(30) NOT NULL,
+    Manager_Rating Varchar(30) NULL,
+    );
+
+select * from Reviews;
+
+INSERT INTO Reviews(Employee_ID,Personal_Rating,Technical_Rating,Manager_Rating) VALUES (1,'good','good','good')
+INSERT INTO Reviews(Employee_ID,Personal_Rating,Technical_Rating,Manager_Rating) VALUES (3,'good','excellent','poor')
+--------------------------------------------------------------------------------------------------------------------
+CREATE TABLE Rating(
+    Employee_ID int primary key NOT NULL,
+    Rating_ID int NOT NULL,
+	Description Varchar(500) NOT NULL,
+   );
+
+select * from Rating;
+
+INSERT INTO Rating (Employee_ID,Rating_ID,Description) VALUES (1,4,'good');
+INSERT INTO Rating (Employee_ID,Rating_ID,Description) VALUES (2,5,'bad');
+INSERT INTO Rating (Employee_ID,Rating_ID,Description) VALUES (3,6,'excellent');
+INSERT INTO Rating (Employee_ID,Rating_ID,Description) VALUES (10,5,'Excellent');
+---------------------------------------------------------------------------------------------------------------------
+
+Rating                                    
+-------                          
+
+1	4	good                    
+2	5	bad
+3	6	excellent
+10	5	Excellent
+
+
+Reviews
+--------
+
+1	good	good	good
+3	good	excellent	poor
+
+
+
+
+create PROCEDURE Proc_Reviews_Insert
+AS
+BEGIN Transaction
+   declare  @R_Emp_ID Int
+   declare @R_Personal_Rating varchar(50)
+   declare @R_TL_Rating varchar(10)
+   declare @R_Manager_Rating varchar(10)
+
+    insert into Reviews(Emp_ID,Personal_Rating,TL_Rating,Manager_Rating) values(@R_Emp_ID, @R_Personal_Rating, @R_TL_Rating,@R_Manager_Rating)
+Commit Transaction
+
+
+
+
+
+ALTER PROCEDURE  Proc_Reviews_Insert
+AS
+BEGIN
+  
+ declare  @R_Emp_ID Int
+   declare @R_Personal_Rating varchar(30)
+   declare @R_TL_Rating varchar(30)
+   declare @R_Manager_Rating varchar(30)
+    insert into Reviews values(@R_Emp_ID, @R_Personal_Rating, @R_TL_Rating,@R_Manager_Rating)
+   insert into Reviews(Emp_ID,Personal_Rating,TL_Rating,Manager_Rating) values(1,'good','good','good')
+   insert into Reviews(Emp_ID,Personal_Rating,TL_Rating,Manager_Rating) values(2,'good','bad','bad')
+   insert into Reviews(Emp_ID,Personal_Rating,TL_Rating,Manager_Rating) values(3,'good','excellent','poor')
+END
+
+select * from Reviews;
+
+Delete from reviews where EMP_ID = '2'
+
+
+
+
+
+create PROCEDURE Proc_Rating_Insert
+AS
+BEGIN Transaction
+   declare  @R_Emp_ID Int
+   declare  @R_Rating_ID Int
+   declare @R_Description varchar(500)
+   insert into Rating(Emp_ID,Rating_ID,Description) values(@R_Emp_ID,@R_Rating_ID, @R_Description)
+Commit Transaction
+
+
+
+ALTER PROCEDURE  Proc_Rating_Insert
+AS
+BEGIN
+   declare  @R_Emp_ID Int
+   declare  @R_Rating_ID Int
+   declare @R_Description varchar(500)
+    insert into Rating values(@R_Emp_ID,@R_Rating_ID, @R_Description)
+    insert into Rating(Emp_ID,Rating_ID,Description) values(1,4,'good')
+    insert into Rating(Emp_ID,Rating_ID,Description) values(2,5,'bad')
+    insert into Rating(Emp_ID,Rating_ID,Description) values(3,6,'excellent')
+END
+
+select * from Rating;
